@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.van.dao.SchoolClassMapper">
+
+    <select id="getSchoolClass" resultType="SchoolClass">
+        select * from test.class
+    </select>
+    
+    <select id="getAllStudent" resultMap="StudentOfClass">
+        select c.id as cid,c.name as cname,s.id as sid,s.name as sname from test.class c,test.student s where c.id = s.cid
+    </select>
+    
+    <resultMap id="StudentOfClass" type="SchoolClass">
+        <result property="id" column="cid"/>
+        <result property="name" column="cname"/>
+        <!--javaType指定属性的类型，ofType指定集合的泛型信息-->
+        <collection property="studentList" ofType="Student">
+            <result property="id" column="sid"/>
+            <result property="name" column="sname"/>
+        </collection>
+    </resultMap>
+
+    <select id="getClassAndStudent" resultMap="classAndStudent">
+        select * from test.class
+    </select>
+
+    <resultMap id="classAndStudent" type="SchoolClass">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="studentList" column="id" javaType="ArrayList" ofType="Student" select="getStudentByClassID"/>
+    </resultMap>
+
+    <select id="getStudentByClassID" resultType="Student">
+        select * from test.student where cid = #{cid}
+    </select>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="student" class="com.van.pojo.Student">
+        <property name="name" value="may"/>
+        <property name="address" ref="address"/>
+        <property name="books">
+            <array>
+                <value>JAVA</value>
+                <value>PHP</value>
+                <value>C++</value>
+            </array>
+        </property>
+        <property name="card">
+            <map>
+                <entry key="id" value="123456"/>
+                <entry key="credit" value="99990000"/>
+            </map>
+        </property>
+        <property name="hobby">
+            <list>
+                <value>soccer</value>
+                <value>game</value>
+            </list>
+        </property>
+        <property name="info">
+            <props>
+                <prop key="age">18</prop>
+                <prop key="sex">male</prop>
+            </props>
+        </property>
+        <property name="games">
+            <set>
+                <value>2077</value>
+                <value>FIFA</value>
+                <value>FIFA</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="address" class="com.van.pojo.Address"/>
+</beans>
